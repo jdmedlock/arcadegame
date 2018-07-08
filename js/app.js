@@ -37,6 +37,19 @@ class Enemy {
   }
 
   /**
+   * @description Retrieve the current position of the enemy avatar
+   * @returns {Object} An object containing the x and y coordinates of the
+   * player avatar. 
+   * @memberof Enemy
+   */
+  getPosition() {
+    return {
+      x: this.x,
+      y: this.y
+    };
+  }
+
+  /**
    * @description Update the enemy's position. This method is required by the
    * game engine.
    * @param {Number} dt a time delta between ticks of the game clock
@@ -83,6 +96,19 @@ class Player {
     this.startingCol = this.getRandomInt(MAX_ROWS);
     this.x = this.startingCol * CELL_WIDTH;
     this.y = (this.startingRow * CELL_HEIGHT) - 10;
+  }
+
+  /**
+   * @description Retrieve the current position of the player avatar
+   * @returns {Object} An object containing the x and y coordinates of the
+   * player avatar. 
+   * @memberof Player
+   */
+  getPosition() {
+    return {
+      x: this.x,
+      y: this.y
+    };
   }
 
   /**
