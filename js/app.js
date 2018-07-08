@@ -1,7 +1,11 @@
 
 // Constants used across the application
-const GAME_NOROWS = 6;  // Number of rows on the game board
-const GAME_NOCOLS = 5;  // Number of columns on the game board
+const MAX_ROWS = 6;
+const MAX_COLS = 5;
+const CELL_WIDTH = 101;
+const CELL_HEIGHT = 83;
+const MIN_ROW_BOUNDARY = 0;
+const MAX_ROW_BOUNDARY = (MAX_ROWS - 1) * CELL_WIDTH;
 
 /**
  * @description Enemy defines an enemy sprite and controls its movement on the
@@ -24,28 +28,10 @@ class Enemy {
     this.sprite = 'images/enemy-bug.png';
 
     this.rowConstraint = row;
-    this.x = 0;
-    this.y = (this.rowConstraint * 83) - 20;
+    this.x = MIN_ROW_BOUNDARY;
+    this.y = (this.rowConstraint * CELL_HEIGHT) - 20;
     this.startRow = 1;
     this.endRow = 3;
-  }
-
-  /**
-   * @description Retrieve the first row enemies are constrained to
-   * @returns {Number} Starting constraint row
-   * @memberof Enemy
-   */
-  getStartRow() {
-    return this.startRow;
-  }
-
-  /**
-   * @description Retrieve the last row enemies are constrained to
-   * @returns {Number} Ending constraint row
-   * @memberof Enemy
-   */
-  getEndRow() {
-    return this.endRow;
   }
 
   /**
@@ -58,6 +44,8 @@ class Enemy {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x = this.x >= MAX_ROW_BOUNDARY ? MIN_ROW_BOUNDARY : this.x;
+    this.x = this.x + ((50 * dt) * this.rowConstraint);
   }
 
   /**
@@ -90,7 +78,7 @@ class Player {
     // a helper we've provided to easily load images
     this.sprite = 'images/char-boy.png';
     this.startingRow = 5;
-    this.startingCol = this.getRandomInt(GAME_NOROWS);
+    this.startingCol = this.getRandomInt(MAX_ROWS);
     this.x = this.startingCol * 101;
     this.y = (this.startingRow * 83) - 10;
   }
