@@ -1,4 +1,8 @@
 
+// Constants used across the application
+const GAME_NOROWS = 6;  // Number of rows on the game board
+const GAME_NOCOLS = 5;  // Number of columns on the game board
+
 /**
  * @description Enemy defines an enemy sprite and controls its movement on the
  * game board. The game engine requires it to contain `render` and `update`
@@ -86,9 +90,20 @@ class Player {
     // a helper we've provided to easily load images
     this.sprite = 'images/char-boy.png';
     this.startingRow = 5;
-    this.startingCol = 3;
+    this.startingCol = this.getRandomInt(GAME_NOROWS);
     this.x = this.startingCol * 101;
     this.y = (this.startingRow * 83) - 10;
+  }
+
+  /**
+   * @description Calculate a random number between 0 and the specified
+   * maximum integer. This function was copied from the example at
+   * [MDN Javascript Math builtin object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)
+   * @param {Number} max
+   * @returns {Number} A number in the range 0-`max`
+   */
+  getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
   }
 
   /**

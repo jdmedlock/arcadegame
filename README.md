@@ -44,6 +44,10 @@ The bugs move at varying speeds from left-to-right across the paved lanes on
 the board. The player uses keyboard arrow keys to move the avatar left, right,
 up and down to move one block at a time.
 
+When the game starts bugs always are always in the first column in their
+respective row. However, the player avatar always starts in the bottom row, but
+at a random column position for each game.
+
 The game is won when the player's avatar reaches the water. However, if the
 avatar collides with a bug the game is lost. At the end of a game they players
 score is updated and the avatar is moved to the starting square. A new game can
