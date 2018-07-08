@@ -21,7 +21,7 @@ class Enemy {
 
     this.rowConstraint = row;
     this.x = 0;
-    this.y = row * 101;
+    this.y = (this.rowConstraint * 83) - 20;
     this.startRow = 1;
     this.endRow = 3;
   }
@@ -85,9 +85,10 @@ class Player {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-boy.png';
-
-    this.x = 50;
-    this.y = 50;
+    this.startingRow = 5;
+    this.startingCol = 3;
+    this.x = this.startingCol * 101;
+    this.y = (this.startingRow * 83) - 10;
   }
 
   /**
