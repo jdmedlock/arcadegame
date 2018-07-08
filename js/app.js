@@ -5,9 +5,9 @@ const MAX_COLS = 5;
 const CELL_WIDTH = 101;
 const CELL_HEIGHT = 83;
 const MIN_ROW_BOUNDARY = 0;
-const MAX_ROW_BOUNDARY = (MAX_ROWS - 1) * CELL_WIDTH;
+const MAX_ROW_BOUNDARY = (MAX_COLS - 1) * CELL_WIDTH;
 const MIN_COL_BOUNDARY = 0;
-const MAX_COL_BOUNDARY = (MAX_COLS - 1) * CELL_HEIGHT;
+const MAX_COL_BOUNDARY = (MAX_ROWS - 1) * CELL_HEIGHT;
 
 /**
  * @description Enemy defines an enemy sprite and controls its movement on the
@@ -82,7 +82,7 @@ class Player {
     this.startingRow = MAX_ROWS - 1;
     this.startingCol = this.getRandomInt(MAX_ROWS);
     this.x = this.startingCol * CELL_WIDTH;
-    this.y = (this.startingRow * CELL_HEIGHT) - 10;
+    this.y = (this.startingRow * CELL_HEIGHT);
   }
 
   /**
@@ -115,28 +115,28 @@ class Player {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 
-/**
- * @description Process a request to move the player avatar one cell on the
- * game board.
- * @param {String} keyCode Direction to move the player avatar. Acceptable
- * values are `left`, `right`, `up`, or `down`.
- * @memberof Player
- */
-handleInput(keyCode) {
-    console.log(`keyCode: ${keyCode}`);
+  /**
+   * @description Process a request to move the player avatar one cell on the
+   * game board. Attempts to move past the left, right, top, or bottom
+   * boundaries are ignored.
+   * @param {String} keyCode Direction to move the player avatar. Acceptable
+   * values are `left`, `right`, `up`, or `down`.
+   * @memberof Player
+   */
+  handleInput(keyCode) {
     switch (keyCode) {
       case 'left':
-        this.x = this.x <= MIN_ROW_BOUNDARY ? MIN_ROW_BOUNDARY : this.x - CELL_WIDTH;
+        this.x = this.x <= MIN_ROW_BOUNDARY ? this.x : this.x - CELL_WIDTH;
+        break;
+      case 'up':
+        this.y = this.y <= MIN_COL_BOUNDARY ? this.y : this.y - CELL_HEIGHT;
         break;
       case 'right':
-        this.x = this.x >= MAX_ROW_BOUNDARY ? MAX_ROW_BOUNDARY : this.x + CELL_WIDTH;
-      break;
-      case 'up':
-        this.y = this.y <= MIN_COL_BOUNDARY ? MIN_COL_BOUNDARY : this.y - CELL_HEIGHT;
-      break;
+        this.x = this.x >= MAX_ROW_BOUNDARY ? this.x : this.x + CELL_WIDTH;
+        break;
       case 'down':
-        this.y = this.y <= MAX_COL_BOUNDARY ? MAX_COL_BOUNDARY : this.y + CELL_HEIGHT;
-      break;
+        this.y = this.y >= MAX_COL_BOUNDARY ? this.y : this.y + CELL_HEIGHT;
+        break;
       default:
         throw new Error(`Invalid key code encountered - ${keyCode}`);
     }
