@@ -7,7 +7,7 @@ const CELL_HEIGHT = 83;
 const MIN_ROW_BOUNDARY = 0;
 const MAX_ROW_BOUNDARY = (MAX_COLS - 1) * CELL_WIDTH;
 const MIN_COL_BOUNDARY = 0;
-const MAX_COL_BOUNDARY = (MAX_ROWS - 1) * CELL_HEIGHT;
+const MAX_COL_BOUNDARY = (MAX_ROWS - 1) * CELL_HEIGHT - 10;
 
 /**
  * @description Enemy defines an enemy sprite and controls its movement on the
@@ -82,7 +82,7 @@ class Player {
     this.startingRow = MAX_ROWS - 1;
     this.startingCol = this.getRandomInt(MAX_ROWS);
     this.x = this.startingCol * CELL_WIDTH;
-    this.y = (this.startingRow * CELL_HEIGHT);
+    this.y = (this.startingRow * CELL_HEIGHT) - 10;
   }
 
   /**
