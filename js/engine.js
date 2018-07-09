@@ -79,7 +79,25 @@ var Engine = (function (global) {
 	 */
 	function update(dt) {
 		updateEntities(dt);
-		// checkCollisions();
+		checkCollisions();
+	}
+
+
+	/**
+	 * @description Check the position of the player avatar against that of
+	 * all enemy avatars to see if any collisions have occurred
+	 */
+	function checkCollisions() {
+		const playerPosition = player.getPosition();
+		allEnemies.forEach((enemy) => {
+			const enemyPosition = enemy.getPosition();
+			const relativeX = playerPosition.x - enemyPosition.x;
+			const relativeY = playerPosition.y - enemyPosition.y;
+			if ( (relativeX >= -10 && relativeX <= 10) &&
+					 (relativeY >= -10 && relativeY <= 10) ) {
+				console.log('Collision detected');
+			}
+		});
 	}
 
 	/* This is called by the update function and loops through all of the
