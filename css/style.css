@@ -2,12 +2,24 @@ body {
   text-align: center;
 }
 
+button {
+  font-size: 1.5em;
+  border-radius: 10px 10px 10px 10px;
+  border: .10em solid black;
+}
+
 .title-bar {
   background-color: #7FB0EA;
 }
 
 .controls-bar {
-  margin-bottom: 0;
+  display: flex;
+
+}
+
+.metrics {
+  flex-flow: wrap row;
+  justify-content: center;
 }
 
 #game-board {
