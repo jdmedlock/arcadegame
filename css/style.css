@@ -6,12 +6,16 @@ body {
   text-align: center;
 }
 
+canvas {
+  margin-top: -50px;
+}
+
 button {
   font-size: 1em;
   background-color: #3B93D6;
   border: .10em solid #718EA4;
   box-shadow: 0 0 2px 496D89;
-  margin-right: 1em;
+  margin: 0 1em 0 1em;
   color: white;
   height: 2.5em;
   width: 5em;
@@ -30,9 +34,8 @@ button {
 }
 
 #game-board {
-  margin: 0 0 0 0;
+  margin: 0 .5em 0 .5em;
 }
 
 .footer-bar {
-  background-color: #7FB0EA;
 }
