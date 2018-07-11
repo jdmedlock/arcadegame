@@ -18,12 +18,12 @@ var Engine = (function (global) {
 	 * create the canvas element, grab the 2D context for that canvas
 	 * set the canvas elements height/width and add it to the DOM.
 	 */
-	var doc = global.document,
-		win = global.window,
-		canvas = doc.createElement('canvas'),
-		ctx = canvas.getContext('2d'),
-		lastTime,
-		isCollisionDetected = false;
+	const doc = global.document;
+	const	win = global.window;
+	const	canvas = doc.createElement('canvas');
+	const	ctx = canvas.getContext('2d');
+	let	lastTime;
+	let	isCollisionDetected = false;
 
 	canvas.width = 505;
 	canvas.height = 606;
@@ -66,7 +66,7 @@ var Engine = (function (global) {
 	 * game loop.
 	 */
 	function init() {
-		reset();
+		reset(false);
 		lastTime = Date.now();
 		main();
 	}
@@ -83,8 +83,10 @@ var Engine = (function (global) {
 	function update(dt) {
 		updateEntities(dt);
 		checkCollisions();
+		if (player.hasWon()) {
+			reset(true);
+		}
 	}
-
 
 	/**
 	 * @description Check the position of the player avatar against that of
@@ -136,8 +138,8 @@ var Engine = (function (global) {
 				'images/grass-block.png', // Row 1 of 2 of grass
 				'images/grass-block.png' // Row 2 of 2 of grass
 			],
-			numRows = 6,
-			numCols = 5,
+			numRows = MAX_ROWS,
+			numCols = MAX_COLS,
 			row, col;
 
 		// Before drawing, clear existing canvas
@@ -182,8 +184,14 @@ var Engine = (function (global) {
 	 * handle game reset states - maybe a new game menu or a game over screen
 	 * those sorts of things. It's only called once by the init() method.
 	 */
-	function reset() {
-		// noop
+	function reset(incrementScore) {
+		if (incrementScore) {
+			const noWins = game.incrementPlays();
+			doc.getElementById('wins').innerText = noWins;
+			const noPlays = game.incrementPlays();
+			doc.getElementById('plays').innerText = noPlays;
+		}
+		isCollisionDetected = false;
 	}
 
 	/* Go ahead and load all of the images we know we're going to need to

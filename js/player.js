@@ -20,6 +20,15 @@ class Player {
     this.sprite = 'images/char-boy.png';
     this.startingRow = MAX_ROWS - 1;
     this.startingCol = this.getRandomInt(MAX_ROWS);
+    this.resetPosition();
+  }
+
+  /**
+   * @description Reset the player avatar to its starting position on the
+   * game board
+   * @memberof Player
+   */
+  resetPosition() {
     this.x = this.startingCol * CELL_WIDTH;
     this.y = (this.startingRow * CELL_HEIGHT) - 10;
   }
@@ -49,13 +58,25 @@ class Player {
   }
 
   /**
+   * @description Convert a y coordinate value in the canvas to a row number in
+   * the game grid.
+   * @param {Number} y Value of the y coordinate in the canvas
+   * @returns {Number} Row number within the game grid
+   * @memberof Player
+   */
+  convertToRowNo(y) {
+    return Math.ceil(this.y / CELL_HEIGHT);
+  }
+
+  /**
    * @description Update the player's position. This method is required by the
    * game engine.
    * @param {Number} dt a time delta between ticks of the game clock
    * @memberof Player
    */
   update() {
-
+    // Updates to the player position are made in handleInput(), which updates
+    // the x and y coordinates of the player avatar.
   }
 
   /**
@@ -70,7 +91,9 @@ class Player {
   /**
    * @description Process a request to move the player avatar one cell on the
    * game board. Attempts to move past the left, right, top, or bottom
-   * boundaries are ignored.
+   * boundaries are ignored. The x and y coordinates of the players avatar
+   * are calculated here rather than in the update() function to eliminate the
+   * dependency on a saved direction state in update().
    * @param {String} keyCode Direction to move the player avatar. Acceptable
    * values are `left`, `right`, `up`, or `down`.
    * @memberof Player
@@ -92,5 +115,18 @@ class Player {
       default:
         throw new Error(`Invalid key code encountered - ${keyCode}`);
     }
+  }
+
+  /**
+   * @description Check to see if the player has won the current game
+   * @returns {Boolean} `true` if the game has been won
+   * @memberof Player
+   */
+  hasWon() {
+    if (this.convertToRowNo(this.y) === WIN_ROW) {
+      this.resetPosition();
+      return true;
+    }
+    return false;
   }
 }
