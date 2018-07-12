@@ -30,7 +30,12 @@ button {
 }
 
 .status-element {
+  font-size: 1.25em;
   margin-right: 1em;
+}
+
+.space-before {
+  margin-left: 1em;
 }
 
 #game-board {
