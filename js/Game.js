@@ -14,8 +14,8 @@ class Game {
     // at playing the game.
 
     // Initialize the game score and number 
-    this.noGamesWon = -1;
-    this.noGamesPlayed = -1;
+    this.noGamesWon = 0;
+    this.noGamesPlayed = 0;
   }
 
   /**
@@ -32,10 +32,12 @@ class Game {
 
   /**
    * @description Increment the number of games won
+   * @returns {Number} Number of games won
    * @memberof Game
    */
   incrementWins() {
     this.noGamesWon += 1;
+    return this.noGamesWon;
   }
 
   /**
@@ -44,6 +46,7 @@ class Game {
    * @memberof Game
    */
   incrementPlays() {
-    return this.noGamesPlayed += 1;
+    this.noGamesPlayed += 1;
+    return this.noGamesPlayed;
   }
 }

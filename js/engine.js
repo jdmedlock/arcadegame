@@ -23,7 +23,7 @@ var Engine = (function (global) {
 	const	canvas = doc.createElement('canvas');
 	const	ctx = canvas.getContext('2d');
 	let	lastTime;
-	let	isCollisionDetected = false;
+	let	shouldStop = false;
 
 	canvas.width = 505;
 	canvas.height = 606;
@@ -56,7 +56,7 @@ var Engine = (function (global) {
 		/* Use the browser's requestAnimationFrame function to call this
 		 * function again as soon as the browser is able to draw another frame.
 		 */
-		if (!isCollisionDetected) {
+		if (!shouldStop) {
 			win.requestAnimationFrame(main);
 		}
 	}
@@ -66,7 +66,7 @@ var Engine = (function (global) {
 	 * game loop.
 	 */
 	function init() {
-		reset(false);
+		reset();
 		lastTime = Date.now();
 		main();
 	}
@@ -82,9 +82,10 @@ var Engine = (function (global) {
 	 */
 	function update(dt) {
 		updateEntities(dt);
-		checkCollisions();
-		if (player.hasWon()) {
-			reset(true);
+		shouldStop = checkCollisions();
+		if (!shouldStop && player.hasWon()) {
+			doc.getElementById('wins').innerText = game.incrementWins();
+			shouldStop = true;
 		}
 	}
 
@@ -94,16 +95,17 @@ var Engine = (function (global) {
 	 */
 	function checkCollisions() {
 		const playerPosition = player.getPosition();
-		allEnemies.forEach((enemy) => {
-			const enemyPosition = enemy.getPosition();
-			const relativeX = playerPosition.x - enemyPosition.x;
-			const relativeY = playerPosition.y - enemyPosition.y;
+		for (let i = 0; i < allEnemies.length; i += 1) {
+			const enemyPosition = allEnemies[i].getPosition();
+			const relativeX = Math.floor(playerPosition.x - enemyPosition.x);
+			const relativeY = Math.floor(playerPosition.y - enemyPosition.y);
 			if ( (relativeX >= -10 && relativeX <= 10) &&
 					 (relativeY >= -10 && relativeY <= 10) ) {
-				console.log('Collision detected');
-				isCollisionDetected = true;
-			}
-		});
+				shouldStop = true;
+				return true;
+			} 
+		}
+		return false;
 	}
 
 	/* This is called by the update function and loops through all of the
@@ -184,14 +186,9 @@ var Engine = (function (global) {
 	 * handle game reset states - maybe a new game menu or a game over screen
 	 * those sorts of things. It's only called once by the init() method.
 	 */
-	function reset(incrementScore) {
-		if (incrementScore) {
-			const noWins = game.incrementPlays();
-			doc.getElementById('wins').innerText = noWins;
-			const noPlays = game.incrementPlays();
-			doc.getElementById('plays').innerText = noPlays;
-		}
-		isCollisionDetected = false;
+	function reset() {
+		doc.getElementById('plays').innerText = game.incrementPlays();
+		shouldStop = false;
 	}
 
 	/* Go ahead and load all of the images we know we're going to need to

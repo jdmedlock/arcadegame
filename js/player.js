@@ -19,7 +19,6 @@ class Player {
     // a helper we've provided to easily load images
     this.sprite = 'images/char-boy.png';
     this.startingRow = MAX_ROWS - 1;
-    this.startingCol = this.getRandomInt(MAX_ROWS);
     this.resetPosition();
   }
 
@@ -29,6 +28,7 @@ class Player {
    * @memberof Player
    */
   resetPosition() {
+    this.startingCol = this.getRandomInt(MAX_ROWS);
     this.x = this.startingCol * CELL_WIDTH;
     this.y = (this.startingRow * CELL_HEIGHT) - 10;
   }

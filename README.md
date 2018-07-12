@@ -51,8 +51,8 @@ be started by clicking the 'Start Game' button.
 In addition to the basic game play several UI components have been implemented
 to provide the player with features to improve the overall experience.
 
-* Start Game - This button allows the player to start a new game at any time -
-even if the current game is still in progress.
+* Start/Reset Game - This button allows the player to start a new game at any
+time - even if the current game is still in progress.
 
 * Save Game - This button allows the cumulative score and gems to be saved to
 a file.
