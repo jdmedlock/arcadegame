@@ -118,8 +118,6 @@ class Player {
     const continueButton = event.target.closest('#continue-button');
     if (continueButton === null) {
       switch (keyCode) {
-        case 'esc':
-          break;
         case 'left':
           this.x = this.x <= MIN_ROW_BOUNDARY ? this.x : this.x - CELL_WIDTH;
           break;
@@ -133,7 +131,7 @@ class Player {
           this.y = this.y >= MAX_COL_BOUNDARY ? this.y : this.y + CELL_HEIGHT;
           break;
         default:
-          throw new Error(`Invalid key code encountered - ${keyCode}`);
+          break;
       }
     }
   }

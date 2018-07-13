@@ -74,8 +74,8 @@ class Game {
 
     // Listen for and trap keyboard events. Bind the trap function to the
     // context of 'this' object rather than that of the event
-    this.trapEscKey = this.trapTheEscKey.bind(this);
-    this.modal.addEventListener('keydown', this.trapEscKey);
+    this.trapSpecialKeys = this.trapTheSpecialKeys.bind(this);
+    this.modal.addEventListener('keydown', this.trapSpecialKeys);
 
     // Listen for indicators to close the modal. Bind the trap function to the
     // context of 'this' object rather than that of the button
@@ -90,6 +90,10 @@ class Game {
     focusableElements = Array.prototype.slice.call(focusableElements);
     const firstTabStop = focusableElements[0];
     const lastTabStop = focusableElements[focusableElements.length - 1];
+    // Add the focusable tab stops to the document so they can be referenced
+    // by the key handler
+    document.firstTabStop = firstTabStop;
+    document.lastTabStop = lastTabStop;
 
     // Show the modal and overlay
     this.modal.style.display = 'block';
@@ -102,12 +106,32 @@ class Game {
   }
 
   /**
-   * @description Trap the escape key
+   * @description Trap the tab and escape key
    * @param {object} event Instance of an event object
    * @memberof Game
    */
-  trapTheEscKey(event) {
-    if (event.keyCode === 27) { // Escape key
+  trapTheSpecialKeys(event) {
+    // Check for TAB key press
+    if (event.keyCode === 9) {
+
+      // SHIFT + TAB
+      if (event.shiftKey) {
+        if (document.activeElement === document.firstTabStop) {
+          event.preventDefault();
+          document.lastTabStop.focus();
+        }
+
+      // TAB
+      } else {
+        if (document.activeElement === document.lastTabStop) {
+          event.preventDefault();
+          document.firstTabStop.focus();
+        }
+      }
+    }
+
+    // Close the modal if an ESC key is pressed
+    if (event.keyCode === 27) {
       this.closeTheModal();
     }
   }

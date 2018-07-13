@@ -13,12 +13,17 @@ canvas {
 button {
   font-size: 1em;
   background-color: #3B93D6;
-  border: .10em solid #718EA4;
+  border: .20em solid #718EA4;
+  border: none;
   box-shadow: 0 0 2px 496D89;
   margin: 0 1em 0 1em;
   color: white;
   height: 2.5em;
   width: 5em;
+}
+
+button:focus {
+  outline: rgb(3, 61, 106);
 }
 
 .wrapper {
@@ -82,19 +87,9 @@ button {
   padding: 0;
 }
 
-.field {
-  display: inline-block;
-  vertical-align: bottom;
-}
-
 .modal .field {
     display: block;
     margin-bottom: 10px;
-}
-
-.modal input[type=text],
-.modal input[type=password] {
-    width: auto;
 }
 
 .modal h1,

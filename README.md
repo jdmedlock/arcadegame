@@ -43,22 +43,12 @@ at a random column position for each game.
 
 The game is won when the player's avatar reaches the water. However, if the
 avatar collides with a bug the game is lost. At the end of a game they players
-score is updated and the avatar is moved to the starting square. A new game can
-be started by clicking the 'Start Game' button.
+score is updated and the avatar is moved to the starting square.
 
 ## Player UI Features
 
 In addition to the basic game play several UI components have been implemented
 to provide the player with features to improve the overall experience.
-
-* Start/Reset Game - This button allows the player to start a new game at any
-time - even if the current game is still in progress.
-
-* Save Game - This button allows the cumulative score and gems to be saved to
-a file.
-
-* Load Game - This button allows the cumulative score and gems to be restored
-from a previously saved file.
 
 * Score - The players score is represented as 'www / ggg' where 'www' is the
 number of games won and 'ggg' is the number of games played
