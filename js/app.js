@@ -1,4 +1,3 @@
-
 // Constants used across the application
 const MAX_ROWS = 6;
 const MAX_COLS = 5;
@@ -13,7 +12,7 @@ const MAX_COL_BOUNDARY = (MAX_ROWS - 1) * CELL_HEIGHT - 10;
 // Now instantiate your objects.
 
 // Create an instance of Game to hold player metrics
-let game = new Game();
+const game = new Game();
 
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [];
@@ -22,7 +21,7 @@ for (let i = 1; i <= 3; ++i) {
 }
 
 // Place the player object in a variable called player
-let player = new Player();
+const player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
