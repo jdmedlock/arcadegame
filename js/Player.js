@@ -20,6 +20,20 @@ class Player {
     this.sprite = 'images/char-boy.png';
     this.startingRow = MAX_ROWS - 1;
     this.resetPosition();
+
+    // This listens for key presses and sends the keys to your
+    // Player.handleInput() method. You don't need to modify this.
+    document.addEventListener('keyup', (event) => {
+      var allowedKeys = {
+        27: 'esc',
+        37: 'left',
+        38: 'up',
+        39: 'right',
+        40: 'down'
+      };
+
+      player.handleInput(allowedKeys[event.keyCode]);
+    });
   }
 
   /**
@@ -101,23 +115,26 @@ class Player {
    * @memberof Player
    */
   handleInput(keyCode) {
-    switch (keyCode) {
-      case 'esc':
-        break;
-      case 'left':
-        this.x = this.x <= MIN_ROW_BOUNDARY ? this.x : this.x - CELL_WIDTH;
-        break;
-      case 'up':
-        this.y = this.y <= MIN_COL_BOUNDARY ? this.y : this.y - CELL_HEIGHT;
-        break;
-      case 'right':
-        this.x = this.x >= MAX_ROW_BOUNDARY ? this.x : this.x + CELL_WIDTH;
-        break;
-      case 'down':
-        this.y = this.y >= MAX_COL_BOUNDARY ? this.y : this.y + CELL_HEIGHT;
-        break;
-      default:
-        throw new Error(`Invalid key code encountered - ${keyCode}`);
+    const continueButton = event.target.closest('#continue-button');
+    if (continueButton === null) {
+      switch (keyCode) {
+        case 'esc':
+          break;
+        case 'left':
+          this.x = this.x <= MIN_ROW_BOUNDARY ? this.x : this.x - CELL_WIDTH;
+          break;
+        case 'up':
+          this.y = this.y <= MIN_COL_BOUNDARY ? this.y : this.y - CELL_HEIGHT;
+          break;
+        case 'right':
+          this.x = this.x >= MAX_ROW_BOUNDARY ? this.x : this.x + CELL_WIDTH;
+          break;
+        case 'down':
+          this.y = this.y >= MAX_COL_BOUNDARY ? this.y : this.y + CELL_HEIGHT;
+          break;
+        default:
+          throw new Error(`Invalid key code encountered - ${keyCode}`);
+      }
     }
   }
 

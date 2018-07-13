@@ -26,20 +26,6 @@ class Game {
     this.modal = document.querySelector('.modal');
     this.modalOverlay = document.querySelector('.modal-overlay');
     this.closeModal = null;
-
-    // This listens for key presses and sends the keys to your
-    // Player.handleInput() method. You don't need to modify this.
-    document.addEventListener('keyup', (event) => {
-      var allowedKeys = {
-        27: 'esc',
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down'
-      };
-
-      player.handleInput(allowedKeys[event.keyCode]);
-    });
   }
 
   /**
