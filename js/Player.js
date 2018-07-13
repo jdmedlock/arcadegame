@@ -100,6 +100,8 @@ class Player {
    */
   handleInput(keyCode) {
     switch (keyCode) {
+      case 'esc':
+        break;
       case 'left':
         this.x = this.x <= MIN_ROW_BOUNDARY ? this.x : this.x - CELL_WIDTH;
         break;

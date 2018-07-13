@@ -85,6 +85,7 @@ var Engine = (function (global) {
 		shouldStop = checkCollisions();
 		if (!shouldStop && player.hasWon()) {
 			doc.getElementById('wins').innerText = game.incrementWins();
+			game.openModal();
 			shouldStop = true;
 		}
 	}
