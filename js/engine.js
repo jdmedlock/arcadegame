@@ -56,6 +56,10 @@ var Engine = (function (global) {
 		/* Use the browser's requestAnimationFrame function to call this
 		 * function again as soon as the browser is able to draw another frame.
 		 */
+		if (shouldStop) {
+			reset();
+			shouldStop = false;
+		}
 		if (!shouldStop) {
 			win.requestAnimationFrame(main);
 		}
@@ -84,9 +88,9 @@ var Engine = (function (global) {
 		updateEntities(dt);
 		shouldStop = checkCollisions();
 		if (!shouldStop && player.hasWon()) {
-			doc.getElementById('wins').innerText = game.incrementWins();
-			game.openModal();
 			shouldStop = true;
+			doc.getElementById('wins').innerText = game.incrementWins();
+			game.openModal('You have won another game!');
 		}
 	}
 
@@ -102,7 +106,7 @@ var Engine = (function (global) {
 			const relativeY = Math.floor(playerPosition.y - enemyPosition.y);
 			if ( (relativeX >= -10 && relativeX <= 10) &&
 					 (relativeY >= -10 && relativeY <= 10) ) {
-				shouldStop = true;
+				game.openModal('You have been defeated! So sad...');
 				return true;
 			} 
 		}
@@ -189,7 +193,7 @@ var Engine = (function (global) {
 	 */
 	function reset() {
 		doc.getElementById('plays').innerText = game.incrementPlays();
-		shouldStop = false;
+		player.resetPosition();
 	}
 
 	/* Go ahead and load all of the images we know we're going to need to

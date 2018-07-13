@@ -26,6 +26,20 @@ class Game {
     this.modal = document.querySelector('.modal');
     this.modalOverlay = document.querySelector('.modal-overlay');
     this.closeModal = null;
+
+    // This listens for key presses and sends the keys to your
+    // Player.handleInput() method. You don't need to modify this.
+    document.addEventListener('keyup', (event) => {
+      var allowedKeys = {
+        27: 'esc',
+        37: 'left',
+        38: 'up',
+        39: 'right',
+        40: 'down'
+      };
+
+      player.handleInput(allowedKeys[event.keyCode]);
+    });
   }
 
   /**
@@ -62,11 +76,15 @@ class Game {
   
   /**
    * @description Open the modal dialog
+   * @param {String} messageText Text to be displayed in the dialogs message area
    * @memberof Game
    */
-  openModal() {
+  openModal(messageText) {
     // Save current focus
     this.focusedElementBeforeModal = document.activeElement;
+
+    // Customize the dialog message
+    document.querySelector('#dialog-message').innerHTML = messageText;
 
     // Listen for and trap keyboard events. Bind the trap function to the
     // context of 'this' object rather than that of the event
