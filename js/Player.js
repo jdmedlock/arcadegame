@@ -28,8 +28,8 @@ class Player {
    * @memberof Player
    */
   resetPosition() {
-    this.startingCol = this.getRandomInt(MAX_ROWS);
-    this.x = this.startingCol * CELL_WIDTH;
+    this.startingCol = this.getRandomInt(1, MAX_COLS);
+    this.x = (this.startingCol - 1) * CELL_WIDTH;
     this.y = (this.startingRow * CELL_HEIGHT) - 10;
   }
 
@@ -47,14 +47,16 @@ class Player {
   }
 
   /**
-   * @description Calculate a random number between 0 and the specified
-   * maximum integer. This function was copied from the example at
+   * @description Calculate a random number between specified minimum and
+   * maximum integers, inclusive. This function was copied from the example at
    * [MDN Javascript Math builtin object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)
    * @param {Number} max
    * @returns {Number} A number in the range 0-`max`
    */
-  getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
   }
 
   /**

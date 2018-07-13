@@ -80,7 +80,6 @@ class Game {
     const focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
     let focusableElements = this.modal.querySelectorAll(focusableElementsString);
     focusableElements = Array.prototype.slice.call(focusableElements);
-
     const firstTabStop = focusableElements[0];
     const lastTabStop = focusableElements[focusableElements.length - 1];
 
