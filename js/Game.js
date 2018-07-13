@@ -7,8 +7,8 @@ class Game {
   /**
    * @description Creates an instance of Game and creates and initializes
    * object variables. The modal dialog code included in this class was
-   * adapted from the Udacity Front End Developer Nanodegree (lesson on 
-   * ARIA)[https://classroom.udacity.com/nanodegrees/nd001/parts/c02fda3b-67bf-48d6-a64f-c6960e2d4d79/modules/d91b4314-da9f-45ea-902e-0b1fb5a06c34/lessons/8311490720/concepts/85569184480923]
+   * adapted from the Udacity Front End Developer Nanodegree [lesson on 
+   * ARIA](https://classroom.udacity.com/nanodegrees/nd001/parts/c02fda3b-67bf-48d6-a64f-c6960e2d4d79/modules/d91b4314-da9f-45ea-902e-0b1fb5a06c34/lessons/8311490720/concepts/85569184480923)
    * @memberof Game
    */
   constructor() {
@@ -59,15 +59,19 @@ class Game {
     this.noGamesPlayed += 1;
     return this.noGamesPlayed;
   }
-
+  
+  /**
+   * @description Open the modal dialog
+   * @memberof Game
+   */
   openModal() {
     // Save current focus
     this.focusedElementBeforeModal = document.activeElement;
 
     // Listen for and trap keyboard events. Bind the trap function to the
     // context of 'this' object rather than that of the event
-    this.trapTabKey = this.trapTheTabKey.bind(this);
-    this.modal.addEventListener('keydown', this.trapTabKey);
+    this.trapEscKey = this.trapTheEscKey.bind(this);
+    this.modal.addEventListener('keydown', this.trapEscKey);
 
     // Listen for indicators to close the modal. Bind the trap function to the
     // context of 'this' object rather than that of the button
@@ -93,20 +97,32 @@ class Game {
     document.querySelector('.wrapper').setAttribute('aria-hidden', true);
   }
 
-  trapTheTabKey(e) {
-    if (e.keyCode === 27) { // Escape key
+  /**
+   * @description Trap the escape key
+   * @param {object} event Instance of an event object
+   * @memberof Game
+   */
+  trapTheEscKey(event) {
+    if (event.keyCode === 27) { // Escape key
       this.closeTheModal();
     }
   }
 
-  closeTheModal() {
-    // Hide the modal and overlay
-    this.modal.style.display = 'none';
-    this.modalOverlay.style.display = 'none';
+  /**
+   * @description Close the open modal dialog
+   * @memberof Game
+   */
+  closeTheModal(event) {
+    const continueButton = event.target.closest('#continue-button');
+    if (continueButton != null) {
+      // Hide the modal and overlay
+      this.modal.style.display = 'none';
+      this.modalOverlay.style.display = 'none';
 
-    // Set focus back to element that had it before the modal was opened
-    this.focusedElementBeforeModal.focus();
+      // Set focus back to element that had it before the modal was opened
+      this.focusedElementBeforeModal.focus();
 
-    document.querySelector('.wrapper').removeAttribute('aria-hidden');
+      document.querySelector('.wrapper').removeAttribute('aria-hidden');
+    }
   }
 }
