@@ -68,21 +68,8 @@ groups each representing a score as shown below
 
 ## Dependencies
 
-This app has the following dependencies
-
-| Module/Library | Environment | Description | Related Files |
-|:---------------|:------------|:------------|:--------------|
-| NPM            | Development | Package manager | package.json |
-| Babel          | Development | Transpiler  | .babelrc |
-| WebPack        | Development | Bundler     | webpack.config.js |
-
-To build the production application bundle, `/dist/bundle-app.js` issue the
-command `npm run build` from the command line. This bundle must be referenced
-in the file `index.html` using the `<script src="dist/bundle-app.js"></script>`
-tag at the bottom of the `<body>` section of the source page.
-
-A complete list of libraries and packages used in this app can be found in the
-`package.json` file.
+This app has no external dependencies to any libraries or modules other than
+the Javascript files in the `js` directory that make up this app.
 
 ## Change Log
 
