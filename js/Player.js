@@ -15,11 +15,25 @@ class Player {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
-    // The image/sprite for our enemies, this uses
+    // The image/sprite for our player, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-boy.png';
     this.startingRow = MAX_ROWS - 1;
     this.resetPosition();
+
+    // This listens for key presses and sends the keys to your
+    // Player.handleInput() method. You don't need to modify this.
+    document.addEventListener('keyup', (event) => {
+      var allowedKeys = {
+        27: 'esc',
+        37: 'left',
+        38: 'up',
+        39: 'right',
+        40: 'down'
+      };
+
+      player.handleInput(allowedKeys[event.keyCode]);
+    });
   }
 
   /**
@@ -28,8 +42,8 @@ class Player {
    * @memberof Player
    */
   resetPosition() {
-    this.startingCol = this.getRandomInt(MAX_ROWS);
-    this.x = this.startingCol * CELL_WIDTH;
+    this.startingCol = this.getRandomInt(1, MAX_COLS);
+    this.x = (this.startingCol - 1) * CELL_WIDTH;
     this.y = (this.startingRow * CELL_HEIGHT) - 10;
   }
 
@@ -47,14 +61,16 @@ class Player {
   }
 
   /**
-   * @description Calculate a random number between 0 and the specified
-   * maximum integer. This function was copied from the example at
+   * @description Calculate a random number between specified minimum and
+   * maximum integers, inclusive. This function was copied from the example at
    * [MDN Javascript Math builtin object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)
    * @param {Number} max
    * @returns {Number} A number in the range 0-`max`
    */
-  getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+  getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min; 
   }
 
   /**
@@ -99,21 +115,24 @@ class Player {
    * @memberof Player
    */
   handleInput(keyCode) {
-    switch (keyCode) {
-      case 'left':
-        this.x = this.x <= MIN_ROW_BOUNDARY ? this.x : this.x - CELL_WIDTH;
-        break;
-      case 'up':
-        this.y = this.y <= MIN_COL_BOUNDARY ? this.y : this.y - CELL_HEIGHT;
-        break;
-      case 'right':
-        this.x = this.x >= MAX_ROW_BOUNDARY ? this.x : this.x + CELL_WIDTH;
-        break;
-      case 'down':
-        this.y = this.y >= MAX_COL_BOUNDARY ? this.y : this.y + CELL_HEIGHT;
-        break;
-      default:
-        throw new Error(`Invalid key code encountered - ${keyCode}`);
+    const continueButton = event.target.closest('#continue-button');
+    if (continueButton === null) {
+      switch (keyCode) {
+        case 'left':
+          this.x = this.x <= MIN_ROW_BOUNDARY ? this.x : this.x - CELL_WIDTH;
+          break;
+        case 'up':
+          this.y = this.y <= MIN_COL_BOUNDARY ? this.y : this.y - CELL_HEIGHT;
+          break;
+        case 'right':
+          this.x = this.x >= MAX_ROW_BOUNDARY ? this.x : this.x + CELL_WIDTH;
+          break;
+        case 'down':
+          this.y = this.y >= MAX_COL_BOUNDARY ? this.y : this.y + CELL_HEIGHT;
+          break;
+        default:
+          break;
+      }
     }
   }
 
