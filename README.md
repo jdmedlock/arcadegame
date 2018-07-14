@@ -66,10 +66,29 @@ groups each representing a score as shown below
 | 2 | 33-65% |
 | 3 | 66-100% |
 
-## Dependencies
+## Building & Running the Game
+
+### Building on a Local Computer
+
+To build the app on your local computer open a new terminal window and follow
+the steps shown below.
+
+| # | Command | Comments |
+|:-:|:--------|:---------|
+| 1 | `cd <parent-destination-directory>` | Navigate to the directory that will contain the application's sub-directory. |
+| 2 | `git clone https://github.com/jdmedlock/arcadegame.git` | This creates the application sub-directory and populates it with the source code and documentation for the current release maintained on GitHub. |
+
+At this point the app will be located at the directory
+`<parent-destination-directory>/arcadegame` on your local computer.
 
 This app has no external dependencies to any libraries or modules other than
-the Javascript files in the `js` directory that make up this app.
+the Javascript files in the `js` directory.
+
+### Running on a Local Computer
+
+When you have successfully downloaded the app from GitHub it can be run from
+your browsers File menu by opening `index.html` located in the application
+directory you created above.
 
 ## Change Log
 
