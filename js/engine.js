@@ -96,9 +96,43 @@ var Engine = (function (global) {
 
 	/**
 	 * @description Check the position of the player avatar against that of
-	 * all enemy avatars to see if any collisions have occurred
+	 * all enemy avatars to see if any collisions have occurred. Collisions may
+	 * occur when the enemies right side intersects with the left side of the
+	 * player or if the right side of the player intersects with the left side
+	 * of the enemy.
 	 */
 	function checkCollisions() {
+		const playerPosition = player.getPosition();
+		const playerXRight = Math.round(playerPosition.x) + CELL_WIDTH;
+		for (let i = 0; i < allEnemies.length; i += 1) {
+			const enemyPosition = allEnemies[i].getPosition();
+			const enemyXRight = Math.round(enemyPosition.x) + CELL_WIDTH;
+
+			// For Enemy-Player collision the following conditions must be met:
+			// - (EnemyX + cell width) >= PlayerX
+			// - (EnemyX + cell width) <= (PlayerX + 5)
+			// - EnemyY = (PlayerY - icon offset)
+			const isEnemyPlayerCollision =
+				(enemyXRight >= Math.round(playerPosition.x)) &&
+				(enemyXRight <= Math.round(playerPosition.x + 5)) &&
+				(Math.round(enemyPosition.y) === Math.round(playerPosition.y - PLAYER_YOFFSET));
+
+			// For player-enemy collision the following conditions must be met:
+			// - (PlayerX + cell width) >= EnemyX
+			// - (PlayerX + cell width) <= (EnemyX + 5)
+			// - (PlayerY - icon offset) = EnemyY
+			const isPlayerEnemyCollision =
+				(playerXRight >= Math.round(enemyPosition.x)) &&
+				(playerXRight <= Math.round(enemyPosition.x + 5)) &&
+				(Math.round(playerPosition.y - PLAYER_YOFFSET) === Math.round(enemyPosition.y));
+
+			if (isEnemyPlayerCollision || isPlayerEnemyCollision) {
+				game.openModal('You have been defeated! So sad...');
+				return true;
+			}
+		}
+		return false;
+		/*
 		const playerPosition = player.getPosition();
 		for (let i = 0; i < allEnemies.length; i += 1) {
 			const enemyPosition = allEnemies[i].getPosition();
@@ -111,6 +145,7 @@ var Engine = (function (global) {
 			}
 		}
 		return false;
+		*/
 	}
 
 	/* This is called by the update function and loops through all of the

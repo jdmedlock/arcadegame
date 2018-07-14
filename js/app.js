@@ -8,6 +8,7 @@ const MIN_ROW_BOUNDARY = 0;
 const MAX_ROW_BOUNDARY = (MAX_COLS - 1) * CELL_WIDTH;
 const MIN_COL_BOUNDARY = 0;
 const MAX_COL_BOUNDARY = (MAX_ROWS - 1) * CELL_HEIGHT - 10;
+const PLAYER_YOFFSET = 10;
 const MAX_GEMS = 3;
 
 // Now instantiate your objects.

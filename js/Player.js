@@ -44,7 +44,7 @@ class Player {
   resetPosition() {
     this.startingCol = this.getRandomInt(1, MAX_COLS);
     this.x = (this.startingCol - 1) * CELL_WIDTH;
-    this.y = (this.startingRow * CELL_HEIGHT) - 10;
+    this.y = (this.startingRow * CELL_HEIGHT) - PLAYER_YOFFSET;
   }
 
   /**
