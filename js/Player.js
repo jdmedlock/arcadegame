@@ -32,7 +32,7 @@ class Player {
         40: 'down'
       };
 
-      player.handleInput(allowedKeys[event.keyCode]);
+      this.handleInput(allowedKeys[event.keyCode]);
     });
   }
 
@@ -44,13 +44,13 @@ class Player {
   resetPosition() {
     this.startingCol = this.getRandomInt(1, MAX_COLS);
     this.x = (this.startingCol - 1) * CELL_WIDTH;
-    this.y = (this.startingRow * CELL_HEIGHT) - 10;
+    this.y = (this.startingRow * CELL_HEIGHT) - PLAYER_YOFFSET;
   }
 
   /**
    * @description Retrieve the current position of the player avatar
    * @returns {Object} An object containing the x and y coordinates of the
-   * player avatar. 
+   * player avatar.
    * @memberof Player
    */
   getPosition() {
@@ -70,7 +70,7 @@ class Player {
   getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min; 
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   /**
@@ -82,17 +82,6 @@ class Player {
    */
   convertToRowNo(y) {
     return Math.ceil(this.y / CELL_HEIGHT);
-  }
-
-  /**
-   * @description Update the player's position. This method is required by the
-   * game engine.
-   * @param {Number} dt a time delta between ticks of the game clock
-   * @memberof Player
-   */
-  update() {
-    // Updates to the player position are made in handleInput(), which updates
-    // the x and y coordinates of the player avatar.
   }
 
   /**
