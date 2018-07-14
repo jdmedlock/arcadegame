@@ -4,7 +4,7 @@
 
 - Initial release
 
-### 1.0.1 - TBD
+### 1.0.1 - July 14, 2018
 
 - Bug fixes and corrections from code review
 
