@@ -18,7 +18,7 @@ class Game {
 
     // Initialize the game score and number 
     this.noGamesWon = 0;
-    this.noGamesPlayed = 0;
+    this.noGamesPlayed = -1;
     this.awardedGems = 0;
 
     // Image URLs for the gems that can be awarded during game play
@@ -35,6 +35,12 @@ class Game {
       { threshold: 32, noGems: 2 },
       { threshold: 65, noGems: 3 }
     ];
+
+    // Add the gems to the page, but hide them until earned
+    for (let i = 0; i < MAX_GEMS; i += 1) {
+      document.querySelector(`#gem-${i}`).setAttribute('src', this.gemUrls[i]);
+      document.querySelector(`#gem-${i}`).style.display = 'none';
+    }
 
     // Will hold previously focused element
     this.focusedElementBeforeModal = null;
@@ -64,10 +70,6 @@ class Game {
    */
   incrementWins() {
     this.noGamesWon += 1;
-    this.updateGems();
-    for (let i = 0; i < this.awardedGems; i += 1) {
-      document.querySelector(`#gem-${i}`).setAttribute('src',this.gemUrls[i]);
-    }
     return this.noGamesWon;
   }
 
@@ -77,21 +79,26 @@ class Game {
    * @memberof Game
    */
   updateGems() {
-    const winPercentage = this.noGamesPlayed === 0
+    // Calculate the number of gems to be awarded based on the players
+    // win percentage
+    const winPercentage = (this.noGamesWon === 0 || this.noGamesPlayed === 0)
       ? 0
-      : (this.noGamesWon / this.noGamesPlayed).toFixed(2);
-    console.log('winPercentage:', winPercentage, 
-    ' noGamesWon: ', this.noGamesWon,   
-    ' noGamesPlayed: ', this.noGamesPlayed,
-    ' raw %: ', (this.noGamesWon/this.noGamesPlayed).toFixed(2));
+      : (this.noGamesWon / this.noGamesPlayed).toFixed(2) * 100;
     this.awardedGems = this.gemAwards.reduce((gemCount, percentileRange) => {
-      console.log(`winPercentage: ${winPercentage} threshold: ${percentileRange.threshold}`);
       if (winPercentage >= percentileRange.threshold) {
         gemCount = percentileRange.noGems;
       }
       return gemCount;
     }, 0);
 
+    // Add gems that have been awarded to the page
+    for (let i = 0; i < MAX_GEMS; i += 1) {
+      if (i < this.awardedGems) {
+        document.querySelector(`#gem-${i}`).style.display = 'block';
+      } else {
+        document.querySelector(`#gem-${i}`).style.display = 'none';
+      }
+    }
   }
 
   /**
@@ -187,6 +194,8 @@ class Game {
   closeTheModal(event) {
     const continueButton = event.target.closest('#continue-button');
     if (continueButton !== null) {
+      this.updateGems();
+
       // Hide the modal and overlay
       this.modal.style.display = 'none';
       this.modalOverlay.style.display = 'none';
