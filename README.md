@@ -43,22 +43,12 @@ at a random column position for each game.
 
 The game is won when the player's avatar reaches the water. However, if the
 avatar collides with a bug the game is lost. At the end of a game they players
-score is updated and the avatar is moved to the starting square. A new game can
-be started by clicking the 'Start Game' button.
+score is updated and the avatar is moved to the starting square.
 
 ## Player UI Features
 
 In addition to the basic game play several UI components have been implemented
 to provide the player with features to improve the overall experience.
-
-* Start/Reset Game - This button allows the player to start a new game at any
-time - even if the current game is still in progress.
-
-* Save Game - This button allows the cumulative score and gems to be saved to
-a file.
-
-* Load Game - This button allows the cumulative score and gems to be restored
-from a previously saved file.
 
 * Score - The players score is represented as 'www / ggg' where 'www' is the
 number of games won and 'ggg' is the number of games played
@@ -66,22 +56,15 @@ number of games won and 'ggg' is the number of games played
 * Gems - These are collectibles that are added and removed based on the
 players win percentage. A gem is added whenever the players win percentage
 advances into the next higher percentile group. A gem is taken away when the win
-percentage drops into the next lower percentile groups. There are ten percentile
-groups each representing a score of
+percentage drops into the next lower percentile groups. There are four percentile
+groups each representing a score as shown below
 
 | Gems Accumulated | Win Percentile |
 |:----------------:|:--------------:|
 | 0 | 0-9% |
-| 1 | 10-19% |
-| 2 | 20-29% |
-| 3 | 30-39% |
-| 4 | 40-49% |
-| 5 | 50-59% |
-| 6 | 60-69% |
-| 7 | 70-79% |
-| 8 | 80-89% |
-| 9 | 90-99% |
-| 10 | 100% |
+| 1 | 10-32% |
+| 2 | 33-65% |
+| 3 | 66-100% |
 
 ## Dependencies
 

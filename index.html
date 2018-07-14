@@ -8,32 +8,36 @@
 </head>
 
 <body>
-	<header class="title-bar">
-    <h1>Bugger Arcade Game</h1>
-    <section class="controls-bar">
-      <button class="load-button">Load</button>
-      <button class="save-button">Save</button>
-      <button class="start-button">Start</button>
-    </section>
-    <section class="status">
-      <div class="status-element"></div>
-        <h3>Score: </h3>
-        <p id="wins" class="space-before">0</p>
-        <p>/</p>
-        <p id="plays">0</p>
-      </div>
-      <div class="status-element"></div>
-        <h3>Gems: </h3>
-        <p class="space-before gems">1-2-3</p>
-      </div>
-    </section>
-  </header>
+  <div class="wrapper">
 
-  <section id="game-board"></section>
+    <header class="title-bar">
+      <h1>Bugger Arcade Game</h1>
 
-  <footer class="footer-bar">
-    <h3>About</h3>
-  </footer>
+      <section class="status">
+        <div class="status-element"></div>
+          <h3>Score: </h3>
+          <p id="wins" class="space-before">0</p>
+          <p>/</p>
+          <p id="plays">0</p>
+          <h3 class="space-before">Gems: </h3>
+          <img id="gem-0" class="space-before gem" src="">
+          <img id="gem-1" class="space-before gem" src="">
+          <img id="gem-2" class="space-before gem" src="">
+        </div>
+      </section>
+    </header>
+
+    <section id="game-board"></section>
+
+  </div>
+
+  <!-- Win/Lose Modal Dialog-->
+  <div class="modal" role="dialog" aria-labelledby="message">
+    <h1 id="dialog-message"></h1>
+    <button id="continue-button">Continue</button>
+  </div>
+  <div class="modal-overlay"></div>
+  
 
   <script src="js/resources.js"></script>
   <script src="js/Game.js"></script>

@@ -8,6 +8,7 @@ const MIN_ROW_BOUNDARY = 0 - CELL_WIDTH;
 const MAX_ROW_BOUNDARY = ((MAX_COLS - 1) * CELL_WIDTH) + CELL_WIDTH;
 const MIN_COL_BOUNDARY = 0;
 const MAX_COL_BOUNDARY = (MAX_ROWS - 1) * CELL_HEIGHT - 10;
+const MAX_GEMS = 3;
 
 // Now instantiate your objects.
 
@@ -22,16 +23,3 @@ for (let i = 1; i <= 3; ++i) {
 
 // Place the player object in a variable called player
 const player = new Player();
-
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
-document.addEventListener('keyup', (event) => {
-	var allowedKeys = {
-		37: 'left',
-		38: 'up',
-		39: 'right',
-		40: 'down'
-	};
-
-	player.handleInput(allowedKeys[event.keyCode]);
-});
