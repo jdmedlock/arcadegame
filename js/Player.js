@@ -32,7 +32,7 @@ class Player {
         40: 'down'
       };
 
-      player.handleInput(allowedKeys[event.keyCode]);
+      this.handleInput(allowedKeys[event.keyCode]);
     });
   }
 
@@ -50,7 +50,7 @@ class Player {
   /**
    * @description Retrieve the current position of the player avatar
    * @returns {Object} An object containing the x and y coordinates of the
-   * player avatar. 
+   * player avatar.
    * @memberof Player
    */
   getPosition() {
@@ -70,7 +70,7 @@ class Player {
   getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1)) + min; 
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
   /**
