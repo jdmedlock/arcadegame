@@ -132,20 +132,6 @@ var Engine = (function (global) {
 			}
 		}
 		return false;
-		/*
-		const playerPosition = player.getPosition();
-		for (let i = 0; i < allEnemies.length; i += 1) {
-			const enemyPosition = allEnemies[i].getPosition();
-			const relativeX = Math.floor(playerPosition.x - enemyPosition.x);
-			const relativeY = Math.floor(playerPosition.y - enemyPosition.y);
-			if ( (relativeX >= -10 && relativeX <= 10) &&
-					 (relativeY >= -10 && relativeY <= 10) ) {
-				game.openModal('You have been defeated! So sad...');
-				return true;
-			}
-		}
-		return false;
-		*/
 	}
 
 	/* This is called by the update function and loops through all of the
