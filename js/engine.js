@@ -108,7 +108,7 @@ var Engine = (function (global) {
 					 (relativeY >= -10 && relativeY <= 10) ) {
 				game.openModal('You have been defeated! So sad...');
 				return true;
-			} 
+			}
 		}
 		return false;
 	}
@@ -124,7 +124,6 @@ var Engine = (function (global) {
 		allEnemies.forEach(function (enemy) {
 			enemy.update(dt);
 		});
-		player.update();
 	}
 
 	/* This function initially draws the "game level", it will then call

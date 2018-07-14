@@ -85,17 +85,6 @@ class Player {
   }
 
   /**
-   * @description Update the player's position. This method is required by the
-   * game engine.
-   * @param {Number} dt a time delta between ticks of the game clock
-   * @memberof Player
-   */
-  update() {
-    // Updates to the player position are made in handleInput(), which updates
-    // the x and y coordinates of the player avatar.
-  }
-
-  /**
    * @description Draw the player on the screen. This method is required by the
    * game engine.
    * @memberof Player
