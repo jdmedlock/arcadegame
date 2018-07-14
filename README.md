@@ -56,22 +56,15 @@ number of games won and 'ggg' is the number of games played
 * Gems - These are collectibles that are added and removed based on the
 players win percentage. A gem is added whenever the players win percentage
 advances into the next higher percentile group. A gem is taken away when the win
-percentage drops into the next lower percentile groups. There are ten percentile
-groups each representing a score of
+percentage drops into the next lower percentile groups. There are four percentile
+groups each representing a score as shown below
 
 | Gems Accumulated | Win Percentile |
 |:----------------:|:--------------:|
 | 0 | 0-9% |
-| 1 | 10-19% |
-| 2 | 20-29% |
-| 3 | 30-39% |
-| 4 | 40-49% |
-| 5 | 50-59% |
-| 6 | 60-69% |
-| 7 | 70-79% |
-| 8 | 80-89% |
-| 9 | 90-99% |
-| 10 | 100% |
+| 1 | 10-32% |
+| 2 | 33-65% |
+| 3 | 66-100% |
 
 ## Dependencies
 

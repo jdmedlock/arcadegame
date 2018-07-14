@@ -49,6 +49,11 @@ button:focus {
   margin-left: 1em;
 }
 
+.gem {
+  width: 2em;
+  height: 2em;
+}
+
 #game-board {
   margin: 0 .5em 0 .5em;
 }

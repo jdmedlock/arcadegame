@@ -1,3 +1,4 @@
+
 /**
  * @description Game defines the player sprite and controls its movement
  * game board
@@ -18,6 +19,22 @@ class Game {
     // Initialize the game score and number 
     this.noGamesWon = 0;
     this.noGamesPlayed = 0;
+    this.awardedGems = 0;
+
+    // Image URLs for the gems that can be awarded during game play
+    this.gemUrls = [
+      'images/Gem Blue.png',
+      'images/Gem Green.png',
+      'images/Gem Orange.png',
+    ];
+
+    // Define the gems to be awarded at specific win percentage thresholds
+    this.gemAwards = [
+      { threshold: 0, noGems: 0 },
+      { threshold: 9, noGems: 1 },
+      { threshold: 32, noGems: 2 },
+      { threshold: 65, noGems: 3 }
+    ];
 
     // Will hold previously focused element
     this.focusedElementBeforeModal = null;
@@ -47,7 +64,34 @@ class Game {
    */
   incrementWins() {
     this.noGamesWon += 1;
+    this.updateGems();
+    for (let i = 0; i < this.awardedGems; i += 1) {
+      document.querySelector(`#gem-${i}`).setAttribute('src',this.gemUrls[i]);
+    }
     return this.noGamesWon;
+  }
+
+  /**
+   * @description Update the number of awarded gems based on the players 
+   * win percentage.
+   * @memberof Game
+   */
+  updateGems() {
+    const winPercentage = this.noGamesPlayed === 0
+      ? 0
+      : (this.noGamesWon / this.noGamesPlayed).toFixed(2);
+    console.log('winPercentage:', winPercentage, 
+    ' noGamesWon: ', this.noGamesWon,   
+    ' noGamesPlayed: ', this.noGamesPlayed,
+    ' raw %: ', (this.noGamesWon/this.noGamesPlayed).toFixed(2));
+    this.awardedGems = this.gemAwards.reduce((gemCount, percentileRange) => {
+      console.log(`winPercentage: ${winPercentage} threshold: ${percentileRange.threshold}`);
+      if (winPercentage >= percentileRange.threshold) {
+        gemCount = percentileRange.noGems;
+      }
+      return gemCount;
+    }, 0);
+
   }
 
   /**
@@ -142,7 +186,7 @@ class Game {
    */
   closeTheModal(event) {
     const continueButton = event.target.closest('#continue-button');
-    if (continueButton != null) {
+    if (continueButton !== null) {
       // Hide the modal and overlay
       this.modal.style.display = 'none';
       this.modalOverlay.style.display = 'none';
