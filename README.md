@@ -1,6 +1,6 @@
-# Memory Game Project
+# Arcade Game Project
 
-[![MemoryGame last commit](https://img.shields.io/github/last-commit/google/skia.svg)](https://github.com/jdmedlock/arcadegame)
+[![ArcadeGame last commit](https://img.shields.io/github/last-commit/google/skia.svg)](https://github.com/jdmedlock/arcadegame)
 <br/>
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/jdmedlock/arcadegame/)
 
